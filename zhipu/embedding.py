@@ -16,7 +16,7 @@ from typing import Dict, List, Any
 from langchain.embeddings.base import Embeddings
 from langchain.pydantic_v1 import BaseModel, root_validator
 
-load_dotenv(find_dotenv('.env'))
+load_dotenv(find_dotenv('../.env'))
 log = Logger()
 
 def zhipu_embedding(text: str):

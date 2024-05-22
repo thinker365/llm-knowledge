@@ -20,7 +20,8 @@ load_dotenv(find_dotenv('../.env'))
 log = Logger()
 
 def zhipu_embedding(text: str):
-	api_key = os.environ['ZHIPUAI_API_KEY']
+	# api_key = os.environ['ZHIPUAI_API_KEY']
+	api_key = '2dbd072adc31da81e6e05a65ab6ced94.lL7e507FPgrTKb9p'
 	client = ZhipuAI(api_key=api_key)
 	return client.embeddings.create(
 		model="embedding-2",

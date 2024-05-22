@@ -10,10 +10,10 @@ from typing import Any, List, Mapping, Optional, Dict
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from zhipuai import ZhipuAI
-
+from common.file_path import BASE_DIR
 from dotenv import load_dotenv, find_dotenv
 
-load_dotenv(find_dotenv('../.env'))
+load_dotenv(find_dotenv(BASE_DIR.joinpath('.env')))
 
 
 class ZhipuAILLM(LLM, ABC):
@@ -73,4 +73,4 @@ class ZhipuAILLM(LLM, ABC):
 
 
 if __name__ == '__main__':
-    zhipu = ZhipuAILLM()
+    ZhipuAILLM()

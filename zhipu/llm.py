@@ -5,7 +5,6 @@
 # @Time: 2024/5/21 16:48
 
 import os
-from abc import ABC
 from typing import Any, List, Mapping, Optional, Dict
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
@@ -16,13 +15,14 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(BASE_DIR.joinpath('.env')))
 
 
-class ZhipuAILLM(LLM, ABC):
+class ZhipuAILLM(LLM):
     # 默认选用 glm-4 模型
     model: str = "glm-4"
     # 温度系数
     temperature: float = 0.1
     # API_Key
-    api_key: str = os.environ["ZHIPUAI_API_KEY"]
+    # api_key: str = os.environ["ZHIPUAI_API_KEY"]
+    api_key: str = '2dbd072adc31da81e6e05a65ab6ced94.lL7e507FPgrTKb9p'
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None,
               run_manager: Optional[CallbackManagerForLLMRun] = None,

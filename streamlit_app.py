@@ -53,7 +53,8 @@ def get_vectordb():
 def get_chat_qa_chain(question: str):
     vectordb = get_vectordb()
     memory = ConversationBufferMemory(
-        memory_key="chat_history",  # 与 prompt 的输入变量保持一致。
+        # memory_key="chat_history",  # 与 prompt 的输入变量保持一致。
+        memory_key=question,  # 与 prompt 的输入变量保持一致。
         return_messages=True  # 将以消息列表的形式返回聊天记录，而不是单个字符串
     )
     retriever = vectordb.as_retriever()
@@ -127,7 +128,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-    # print(generate_response('hello'))
-    # print(get_vectordb())
+    # main()
     # print(get_qa_chain('hello'))
+    get_vectordb()

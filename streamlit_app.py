@@ -14,8 +14,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
 from zhipu.embedding import ZhipuAIEmbeddings
-# from langchain_community.vectorstores import Chroma
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 

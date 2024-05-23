@@ -4,39 +4,31 @@
 # @Author: LiuLinYuan
 # @Time: 2024/5/21 16:48
 
-import os
 from typing import Any, List, Mapping, Optional, Dict
 from langchain_core.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from zhipuai import ZhipuAI
-from common.file_path import BASE_DIR
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv(BASE_DIR.joinpath('.env')))
 
 
+# 继承自 langchain_core.language_models.llms.LLM
 class ZhipuAILLM(LLM):
     # 默认选用 glm-4 模型
     model: str = "glm-4"
     # 温度系数
     temperature: float = 0.1
     # API_Key
-    # api_key: str = os.environ["ZHIPUAI_API_KEY"]
     api_key: str = '2dbd072adc31da81e6e05a65ab6ced94.lL7e507FPgrTKb9p'
 
-    def _call(
-            self, prompt: str,
-            stop: Optional[List[str]] = None,
-            run_manager: Optional[CallbackManagerForLLMRun] = None,
-            **kwargs: Any
-    ):
+    def _call(self, prompt: str, stop: Optional[List[str]] = None,
+              run_manager: Optional[CallbackManagerForLLMRun] = None,
+              **kwargs: Any):
         def gen_glm_params(prompt):
-            """
+            '''
             构造 GLM 模型请求参数 messages
 
             请求参数：
                 prompt: 对应的用户提示词
-            """
+            '''
             messages = [{"role": "user", "content": prompt}]
             return messages
 
@@ -73,8 +65,3 @@ class ZhipuAILLM(LLM):
     def _identifying_params(self) -> Mapping[str, Any]:
         """Get the identifying parameters."""
         return {**{"model": self.model}, **self._default_params}
-
-
-if __name__ == '__main__':
-    zhipu_ai = ZhipuAILLM()
-    zhipu_ai._call('hello')

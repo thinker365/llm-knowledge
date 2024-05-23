@@ -5,7 +5,7 @@
 # File：streamlit_app.py.py
 
 # https://github.com/datawhalechina/llm-universe/blob/main/notebook/C4%20%E6%9E%84%E5%BB%BA%20RAG%20%E5%BA%94%E7%94%A8/streamlit_app.py
-
+import os
 import streamlit as st
 from zhipu.llm import ZhipuAILLM
 from common.file_path import DB_DIR
@@ -17,6 +17,10 @@ from zhipu.embedding import ZhipuAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
+
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
+zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
 
 
 def generate_response(input_text):
@@ -49,7 +53,7 @@ def get_chat_qa_chain(question: str):
     )
     retriever = vectordb.as_retriever()
     qa = ConversationalRetrievalChain.from_llm(
-        llm=ZhipuAILLM().invoke(question),
+        llm=ZhipuAILLM(),
         retriever=retriever,
         memory=memory
     )

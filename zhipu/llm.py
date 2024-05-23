@@ -24,16 +24,19 @@ class ZhipuAILLM(LLM):
     # api_key: str = os.environ["ZHIPUAI_API_KEY"]
     api_key: str = '2dbd072adc31da81e6e05a65ab6ced94.lL7e507FPgrTKb9p'
 
-    def _call(self, prompt: str, stop: Optional[List[str]] = None,
-              run_manager: Optional[CallbackManagerForLLMRun] = None,
-              **kwargs: Any):
+    def _call(
+            self, prompt: str,
+            stop: Optional[List[str]] = None,
+            run_manager: Optional[CallbackManagerForLLMRun] = None,
+            **kwargs: Any
+    ):
         def gen_glm_params(prompt):
-            '''
+            """
             构造 GLM 模型请求参数 messages
 
             请求参数：
                 prompt: 对应的用户提示词
-            '''
+            """
             messages = [{"role": "user", "content": prompt}]
             return messages
 
@@ -73,4 +76,5 @@ class ZhipuAILLM(LLM):
 
 
 if __name__ == '__main__':
-    ZhipuAILLM()
+    zhipu_ai = ZhipuAILLM()
+    zhipu_ai._call('hello')

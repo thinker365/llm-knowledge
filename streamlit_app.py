@@ -110,11 +110,11 @@ def main():
 
         if selected_method == "None":
             # 调用 respond 函数获取回答
-            answer = generate_response(prompt, openai_api_key)
+            answer = generate_response(prompt)
         elif selected_method == "qa_chain":
-            answer = get_qa_chain(prompt, openai_api_key)
+            answer = get_qa_chain(prompt)
         elif selected_method == "chat_qa_chain":
-            answer = get_chat_qa_chain(prompt, openai_api_key)
+            answer = get_chat_qa_chain(prompt)
 
         # 检查回答是否为 None
         if answer is not None:

@@ -12,8 +12,8 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
 from zhipu.embedding import ZhipuAIEmbeddings
-from langchain.vectorstores.chroma import Chroma
-# from langchain_community.vectorstores import Chroma
+# from langchain.vectorstores.chroma import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
@@ -86,7 +86,7 @@ def get_qa_chain(question: str):
 
 # Streamlit 应用程序界面
 def main():
-    st.title('🦜🔗 动手学大模型应用开发')
+    st.title('🦜🔗 基于LLM的本地知识库检索')
     openai_api_key = st.sidebar.text_input('API KEY', type='password')
 
     # 添加一个选择按钮来选择不同的模型
@@ -127,6 +127,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
     # print(get_qa_chain('hello'))
-    # get_vectordb()
+    get_vectordb()

@@ -44,13 +44,12 @@ def get_vectordb():
 def get_chat_qa_chain(question: str):
     vectordb = get_vectordb()
     memory = ConversationBufferMemory(
-        # memory_key="chat_history",  # 与 prompt 的输入变量保持一致。
-        memory_key=question,  # 与 prompt 的输入变量保持一致。
+        memory_key="chat_history",  # 与 prompt 的输入变量保持一致。
         return_messages=True  # 将以消息列表的形式返回聊天记录，而不是单个字符串
     )
     retriever = vectordb.as_retriever()
     qa = ConversationalRetrievalChain.from_llm(
-        llm=ZhipuAILLM(),
+        llm=ZhipuAILLM().invoke(question),
         retriever=retriever,
         memory=memory
     )
@@ -68,7 +67,7 @@ def get_qa_chain(question: str):
         """
     QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"],
                                      template=template)
-    qa_chain = RetrievalQA.from_chain_type(llm=ZhipuAILLM(),
+    qa_chain = RetrievalQA.from_chain_type(llm=ZhipuAILLM().invoke(question),
                                            retriever=vectordb.as_retriever(),
                                            return_source_documents=True,
                                            chain_type_kwargs={"prompt": QA_CHAIN_PROMPT})

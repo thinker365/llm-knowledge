@@ -9,7 +9,7 @@ from __future__ import annotations
 from typing import Dict, List, Any
 
 from langchain.embeddings.base import Embeddings
-from langchain.pydantic_v1 import BaseModel, root_validator
+from langchain.pydantic_v1 import BaseModel
 
 
 class ZhipuAIEmbeddings(BaseModel, Embeddings):
@@ -18,7 +18,7 @@ class ZhipuAIEmbeddings(BaseModel, Embeddings):
     client: Any
     """`zhipuai.ZhipuAI"""
 
-    @root_validator()
+    # @root_validator()
     def validate_environment(cls, values: Dict) -> Dict:
         """
         实例化ZhipuAI为values["client"]

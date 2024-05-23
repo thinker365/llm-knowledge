@@ -127,7 +127,7 @@ def main():
 
 
 if __name__ == "__main__":
-    # main(
+    main()
     # print(generate_response('hello'))
     # print(get_vectordb())
-    print(get_qa_chain('hello'))
+    # print(get_qa_chain('hello'))

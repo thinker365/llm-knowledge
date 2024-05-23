@@ -45,6 +45,7 @@ def get_vectordb():
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
         embedding_function=embedding
     )
+    vectordb.persist()
     return vectordb
 
 

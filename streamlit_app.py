@@ -42,10 +42,11 @@ def get_vectordb():
     persist_directory = DB_DIR.joinpath('chroma')
     # 加载数据库
     vectordb = Chroma(
+        collection_name='langchain',
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
         embedding_function=embedding
     )
-    vectordb.persist()
+    # vectordb.persist()
     return vectordb
 
 
@@ -128,6 +129,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
+    main()
     # print(get_qa_chain('hello'))
-    get_vectordb()
+    # get_vectordb()

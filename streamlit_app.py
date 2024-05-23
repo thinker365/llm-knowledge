@@ -4,6 +4,8 @@
 # Project：LLM-demo
 # File：streamlit_app.py.py
 
+# https://github.com/datawhalechina/llm-universe/blob/main/notebook/C4%20%E6%9E%84%E5%BB%BA%20RAG%20%E5%BA%94%E7%94%A8/streamlit_app.py
+
 import streamlit as st
 from zhipu.llm import ZhipuAILLM
 from common.file_path import DB_DIR
@@ -12,26 +14,15 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
 from zhipu.embedding import ZhipuAIEmbeddings
-# from langchain.vectorstores.chroma import Chroma
 from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
-# from dotenv import load_dotenv, find_dotenv
-
-# _ = load_dotenv(find_dotenv())  # read local .env file
-zhipu_llm = ZhipuAILLM()
-
-
-# zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
-
 
 def generate_response(input_text):
-    # llm = ChatOpenAI(temperature=0.7, openai_api_key=openai_api_key)
     output = ZhipuAILLM().invoke(input_text)
     output_parser = StrOutputParser()
     output = output_parser.invoke(output)
-    # st.info(output)
     return output
 
 
@@ -46,7 +37,6 @@ def get_vectordb():
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
         embedding_function=embedding
     )
-    # vectordb.persist()
     return vectordb
 
 
@@ -89,10 +79,7 @@ def get_qa_chain(question: str):
 # Streamlit 应用程序界面
 def main():
     st.title('🦜🔗 基于LLM的本地知识库检索')
-    openai_api_key = st.sidebar.text_input('API KEY', type='password')
-
     # 添加一个选择按钮来选择不同的模型
-    # selected_method = st.sidebar.selectbox("选择模式", ["qa_chain", "chat_qa_chain", "None"])
     selected_method = st.radio(
         "你想选择哪种模式进行对话？",
         ["None", "qa_chain", "chat_qa_chain"],

@@ -34,7 +34,7 @@ class ZhipuAIEmbeddings(BaseModel, Embeddings):
 	client: Any
 	"""`zhipuai.ZhipuAI"""
 	
-	@root_validator()
+	# @root_validator()
 	def validate_environment(cls, values: Dict) -> Dict:
 		from zhipuai import ZhipuAI
 		values["client"] = ZhipuAI()

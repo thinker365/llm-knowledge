@@ -18,10 +18,6 @@ from langchain_community.vectorstores import Chroma
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 
-from dotenv import load_dotenv, find_dotenv
-_ = load_dotenv(find_dotenv())
-zhipuai_api_key = os.environ['ZHIPUAI_API_KEY']
-
 
 def generate_response(input_text):
     output = ZhipuAILLM().invoke(input_text)
@@ -37,7 +33,6 @@ def get_vectordb():
     persist_directory = DB_DIR.joinpath('chroma')
     # 加载数据库
     vectordb = Chroma(
-        collection_name='langchain',
         persist_directory=persist_directory,  # 允许我们将persist_directory目录保存到磁盘上
         embedding_function=embedding
     )
@@ -71,7 +66,7 @@ def get_qa_chain(question: str):
         """
     QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"],
                                      template=template)
-    qa_chain = RetrievalQA.from_chain_type(llm=ZhipuAILLM().invoke(question),
+    qa_chain = RetrievalQA.from_chain_type(llm=ZhipuAILLM(),
                                            retriever=vectordb.as_retriever(),
                                            return_source_documents=True,
                                            chain_type_kwargs={"prompt": QA_CHAIN_PROMPT})
